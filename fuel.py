@@ -1,11 +1,6 @@
 def main():
-    fraction = input("Fraction: ")
-    x,y = fraction.split("/")
-    x = int(x)
-    y = int(y)
-    print(f"x = {x} and y = {y}")
-    percent = find_percent(x, y)
-
+    percent = find_percent("Fraction: ")
+    
     if percent <= 1:
         print("E")
     elif percent >= 99:
@@ -13,7 +8,29 @@ def main():
     else:
         print(f"percent = {percent}%")
 
-def find_percent(n, d):
-    return round(n/d*100)
+def find_percent(prompt):
+    while True:
+        fraction = input(prompt)
+        n, d = fraction.split("/")
+        
+        try:
+            n = int(n)
+        except ValueError:
+            pass
+        try:
+            d = int(d)
+        except ValueError:
+            pass
+        try:
+            if d >= n:
+                try:
+                    return round(n/d*100)
+                except (ZeroDivisionError, TypeError):
+                    pass
+            else:
+                None
+        except TypeError:
+            pass
+
 
 main()
